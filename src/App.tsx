@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useCallback, useState } from 'react';
 import './App.css';
+import OneCard from './OneCard';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const [result, setResult] = useState<number>(0);
+
+  const addResultHandler = useCallback((value: number) => {
+    setResult((prev) => (prev += value));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container text-center">
+        <div className="row">
+          <div className="col">
+            <OneCard addResultHandler={addResultHandler} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <OneCard addResultHandler={addResultHandler} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <OneCard addResultHandler={addResultHandler} />
+          </div>
+        </div>
+      </div>
+      <div className="result">
+        Результат: <b>{result}</b>
+      </div>
     </div>
   );
 }
